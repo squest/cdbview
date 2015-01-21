@@ -17,6 +17,17 @@ Checkout the docstring for more info.
 
 ### Example:
 
+Assuming you have a couchdb view in a file named "view2.js" like this:
+
+```javascript
+function (doc) {
+  if (doc.type === "{{type}}" {
+    emit(doc.{{target-key}}, doc);
+  }
+}
+```
+With this clojure code
+
 ```clojure
 (ns yourproject.core
   (:require [cdbview.core :refer :all]))
@@ -33,6 +44,16 @@ Checkout the docstring for more info.
                          {:type "tPerson"
                           :target-key "personName"}))
             
+```
+
+It will result in a view that is 
+
+```javascript
+function (doc) {
+  if (doc.type==="tPerson") {
+    emit (doc.personName, doc);
+  }
+}
 ```
 
 ## License
